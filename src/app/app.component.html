@@ -1,0 +1,13 @@
+<section class="container">
+  <div class="left-half">
+    <textarea [(ngModel)]="name" (ngModelChange)="textChanged($event)" placeholder="copy the http request payload here"></textarea>
+  </div>
+  <div class="result">
+    <div class="graphql-query">
+      <pre><code [highlight]="query" [languages]="['javascript']"></code></pre>
+    </div>
+    <div class="graphql-input">
+      <pre><code [highlight]="inputVariables" [languages]="['javascript']"></code></pre>
+    </div>
+  </div>
+</section>

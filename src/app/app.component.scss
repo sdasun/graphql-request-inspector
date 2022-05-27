@@ -1,0 +1,57 @@
+$navbar-margin: 2.5rem;
+$padding: 1rem;
+:host {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - $navbar-margin);
+  background-color: #303030;
+}
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  height: calc(100vh - $navbar-margin);
+  display: flex;
+  width: 100%;
+}
+div {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: $padding;
+  height: calc(100vh - $navbar-margin);
+}
+
+.left-half {
+  align-items: stretch;
+  width: 50%;
+  height: calc(100vh - $navbar-margin);
+
+  margin: 0;
+  textarea {
+    width: calc(100% - 2*$padding);
+    display: flex;
+    height: calc(100% - 2*$padding);
+    background-color: #303030;
+    color: #fff;
+    padding: $padding;
+  }
+}
+
+.result {
+  align-items: stretch;
+  display: flex;
+  justify-items: left;
+  text-align: left;
+  flex-direction: column;
+  width: 50%;
+  gap: 1rem;
+  background-color: #303030;
+  .graphql-query {
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  .graphql-input {
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+}
