@@ -9,7 +9,7 @@
 <section class="container">
   <div class="request">
     <span class="label">Request Payload</span>
-    <textarea [(ngModel)]="request" (ngModelChange)="textChanged($event)" placeholder="copy the http request payload here"></textarea>
+    <textarea (focus)="requestOnFocus()" [(ngModel)]="request" (ngModelChange)="textChanged($event)" placeholder="copy the http request payload here"></textarea>
   </div>
   <div class="result">
     <div class="graphql-query">

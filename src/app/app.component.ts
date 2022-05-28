@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { format } from 'graphql-formatter';
 import { debounceTime, map, Observable, Subject } from 'rxjs';
+const DEFAULT_REQUEST = `{"variables":{"input":{"firstName":"John Doe"}},"query":"mutation ($input: UpdateUser!) {\\n  updateUserProfile(id: 12, input: $input) {\\n    user {\\n        id\\n        firstName\\n        lastName\\n        username\\n        __typename\\n          }\\n status\\n    error\\n    __typename\\n \\n}\\n \\n}\\n"}`;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +9,7 @@ import { debounceTime, map, Observable, Subject } from 'rxjs';
 })
 export class AppComponent {
   title = 'json-to-graphql-decipher';
-  request = `{"variables":{"input":{"firstName":"John Doe"}},"query":"mutation ($input: UpdateUser!) {\\n  updateUserProfile(id: 12, input: $input) {\\n    user {\\n        id\\n        firstName\\n        lastName\\n        username\\n        __typename\\n          }\\n status\\n    error\\n    __typename\\n \\n}\\n \\n}\\n"}`;
+  request = DEFAULT_REQUEST;
   inputVariables = '';
   query = '';
   subject = new Subject();
@@ -27,6 +28,13 @@ export class AppComponent {
   }
   ngOnDestroy() {
     this.subject.unsubscribe();
+  }
+  requestOnFocus() {
+    if (this.request === DEFAULT_REQUEST) {
+      this.request = '';
+      this.query = '';
+      this.inputVariables = '';
+    }
   }
   update() {
     console.log('update');
