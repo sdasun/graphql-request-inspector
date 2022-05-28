@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
         languages: {
           javascript: () => import('highlight.js/lib/languages/javascript'),
           graphql: () => import('highlight.js/lib/languages/graphql'),
+
           json: () => import('highlight.js/lib/languages/json'),
         },
         themePath: 'assets/styles/dark.min.css'

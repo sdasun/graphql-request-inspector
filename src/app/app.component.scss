@@ -1,14 +1,52 @@
-$navbar-margin: 2.5rem;
+$navbar-margin: 3rem;
 $padding: 1rem;
+$border-color: #ccc;
+$background: #303030;
+$background-reverse: #ccc;
+@mixin label {
+  background-color: $background-reverse;
+  padding: 0.125rem 0.25rem;
+  color: $background;
+  font-size: 0.8rem;
+}
 :host {
   display: flex;
   width: 100%;
   height: calc(100vh - $navbar-margin);
-  background-color: #303030;
+  background-color: $background;
+}
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  padding: 0 $padding;
+  width: 100%;
+  height: $navbar-margin;
+  background: $background-reverse;
+  z-index: 100;
+  .brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex-inline;
+    flex-grow: 1;
+    color: #666;
+    margin-right: 1rem;
+    margin-top: 0.25rem;
+  }
+  .github {
+    display: flex-inline;
+    color: $background;
+    margin-right: $padding*2;
+  }
 }
 .container {
   max-width: 100%;
-  margin: 0 auto;
+  margin: $navbar-margin 0 auto;
   height: calc(100vh - $navbar-margin);
   display: flex;
   width: 100%;
@@ -18,22 +56,29 @@ div {
   text-align: center;
   vertical-align: middle;
   padding: $padding;
-  height: calc(100vh - $navbar-margin);
+  height: calc(100vh - $navbar-margin*2);
 }
 
-.left-half {
+.request {
   align-items: stretch;
   width: 50%;
-  height: calc(100vh - $navbar-margin);
-
+  height: calc(100vh - $navbar-margin*2);
+  position: relative;
   margin: 0;
   textarea {
     width: calc(100% - 2*$padding);
     display: flex;
     height: calc(100% - 2*$padding);
-    background-color: #303030;
+    background-color: $background;
     color: #fff;
-    padding: $padding;
+    padding: $padding*2 $padding 0;
+    border: 1px solid $border-color;
+  }
+  .label {
+    position: absolute;
+    top: $padding;
+    left: $padding;
+    @include label;
   }
 }
 
@@ -45,13 +90,30 @@ div {
   flex-direction: column;
   width: 50%;
   gap: 1rem;
-  background-color: #303030;
-  .graphql-query {
-    border: 1px solid #ccc;
+  background-color: $background;
+  .graphql-query, .graphql-input {
+    position: relative;
+    border: 1px solid $border-color;
     text-align: left;
-  }
-  .graphql-input {
-    border: 1px solid #ccc;
-    text-align: left;
+    padding: 0;
+    height: 100%;
+    pre {
+      padding: $padding*0.5 0 0;
+      margin: 0;
+      height: calc(100% - $padding*0.5);
+    }
+    code {
+      padding: $padding;
+      height: calc(100% - $padding*2);
+    }
+    max-height: 70%;
+    .label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include label;
+    }
   }
 }
+
+

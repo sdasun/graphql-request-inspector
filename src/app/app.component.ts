@@ -8,7 +8,7 @@ import { debounceTime, map, Observable, Subject } from 'rxjs';
 })
 export class AppComponent {
   title = 'json-to-graphql-decipher';
-  name = `$ ng build --prod`;
+  request = `{"variables":{},"query":"{\\n  authorizationForLoggedInUser {\\n    user {\\n      id\\n      username\\n      firstName\\n      lastName\\n      email\\n      twoFactorRequired\\n      twoFactorActivated\\n      organisations {\\n        id\\n        name\\n        twoFactorRequired\\n        wizardCompleted\\n        startDate\\n        endDate\\n        roles {\\n          id\\n          name\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"}`;
   inputVariables = '';
   query = '';
   subject = new Subject();
@@ -31,8 +31,8 @@ export class AppComponent {
   update() {
     console.log('update');
     try {
-      const json = JSON.parse(this.name);
-      let inputVariables = JSON.stringify(json.variables, null, 4);
+      const json = JSON.parse(this.request);
+      let inputVariables = JSON.stringify(json.variables, null, 2);
       // inputVariables = inputVariables.replace(/\n/g, '<br>');
       // inputVariables = inputVariables.replace(/\s/g, '&nbsp;');
       this.inputVariables = inputVariables;
@@ -40,6 +40,7 @@ export class AppComponent {
       // remove __typename
       query = query.replace(/__typename/g, '');
       query = format(query);
+      query = query.replace(/\t/g, '  ');
       this.query = query;
     } catch (e) {
       console.log(e);
