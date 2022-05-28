@@ -8,7 +8,7 @@ import { debounceTime, map, Observable, Subject } from 'rxjs';
 })
 export class AppComponent {
   title = 'json-to-graphql-decipher';
-  request = `{"variables":{},"query":"{\\n  authorizationForLoggedInUser {\\n    user {\\n      id\\n      username\\n      firstName\\n      lastName\\n      email\\n      twoFactorRequired\\n      twoFactorActivated\\n      organisations {\\n        id\\n        name\\n        twoFactorRequired\\n        wizardCompleted\\n        startDate\\n        endDate\\n        roles {\\n          id\\n          name\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"}`;
+  request = `{"variables":{"input":{"firstName":"John Doe"}},"query":"mutation ($input: UpdateUser!) {\\n  updateUserProfile(id: 12, input: $input) {\\n    user {\\n        id\\n        firstName\\n        lastName\\n        username\\n        __typename\\n          }\\n status\\n    error\\n    __typename\\n \\n}\\n \\n}\\n"}`;
   inputVariables = '';
   query = '';
   subject = new Subject();
