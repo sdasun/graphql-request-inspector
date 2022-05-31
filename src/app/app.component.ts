@@ -45,6 +45,10 @@ export class AppComponent {
       // inputVariables = inputVariables.replace(/\s/g, '&nbsp;');
       this.inputVariables = inputVariables;
       let query = json.query;
+      //if query not start with query or mutation, then append query
+      if (!query.startsWith('query') && !query.startsWith('mutation')) {
+        query = `query ${query}`;
+      }
       // remove __typename
       query = query.replace(/__typename/g, '');
       query = format(query);
